@@ -1,0 +1,32 @@
+@startuml
+start
+
+:Ввод maps.google.com в адресную строку;
+
+if (IP в списке HSTS?) then (Да)
+  :Используется HTTPS;
+else (Нет)
+  :Используется HTTP;
+endif
+
+if (Домен в кэше браузера?) then (Да)
+  :Отображается страница из кэша;
+else (Нет)
+  :Вызов gethostbyname;
+  :Поиск в host файле;
+  :Запрос на DNS сервис;
+  :Обработка ARP;
+  :Вызов сокета;
+  :Запрос потока сокета TCP;
+  :TLS рукопожатие;
+  : HTTP запрос на сервер;
+  : Ответ с сервера;
+endif
+
+:Разбор HTMl;
+: Интерпретация CSS;
+: Отображение страницы;
+stop
+@enduml
+
+http://www.plantuml.com/plantuml/png/XP9FRjDG4CRtxnIpR3SzGBoWg2oA12Z2la00DwsKn1Kn2tQ9ZH1I-IDLI7H3uGYlKOsDYvqhV7CZllVSLAeLgHlBzlncvlTctluy7RrDtqqdnhyOCy0vLcXnBTFHwNnld2JZIRptEfaALWABQrsWq2KQpVMhw58pNH2lDG-CEJcIdQT3Hv9Oe-ApHY67OHG-sfNqE9x93hx3xXgH0IuyrE96FwFKd6KprlicXr4q30CJJ-OnyP_k_yC9v6TlJewy0tkG-eS2ZRUkzOj-eWUkw6gPM3ALRrkSBZL3st7u0xjfiJceHODAFy8AAfIRodQRxBcUiK_B_kCuFKxcwQltiz4q3dpm5zfkEixF1KK_mE8lRb1qn0z-hjreTIbiQkN9Yv0MNdpbSZliyjRrYc26cjpZbyEW9y0qRiYfmMwfllQvZh3tK8aEkbBHCxPUQCv0wsWt6GBLhQkVlw3i6z_Pyjc1VhpkEsFmNXpsRe43_8P5wO-qOEtday0mzGADPXvbaqwGYwYucuCmT4HlTro-C-njJiy2tlJarEop6w_zVm00
