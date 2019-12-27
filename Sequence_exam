@@ -1,0 +1,51 @@
+@startuml
+Actor Пользователь
+participant Приложение
+participant Сервер
+participant Платежная_система
+
+Activate Приложение
+Activate Сервер
+
+
+Пользователь -> Приложение : Ввод название фильма 
+Приложение -> Сервер : Инф о выбр фильме
+Сервер-->Пользователь : Список кинотеатров
+
+Пользователь -> Приложение : Выбор кинотеатра
+Приложение -> Сервер : Инф о выбр кинотеатре
+Сервер-->Пользователь : Список сеансов
+
+Пользователь -> Приложение : Выбор сеанса
+Приложение -> Сервер : Инф о выбр сеансе
+Сервер-->Пользователь : Список залов
+
+Пользователь -> Приложение : Выбор зала
+Приложение -> Сервер : Инф о выбр зала
+Сервер-->Пользователь : Список мест
+
+Пользователь -> Приложение : Выбор места
+Приложение -> Сервер : Инф о выбр места
+Сервер-->Пользователь : Предложение об оплате
+
+Activate Платежная_система
+
+Пользователь -> Платежная_система : Запрос на оплату билета
+Платежная_система --> Пользователь: Запрос на обработку данных о карте
+Пользователь -> Платежная_система : Отправление данных о карте
+Платежная_система --> Пользователь: Проверка подлинности ( смс с кодом)
+Пользователь -> Платежная_система : Отправка кода
+Платежная_система --> Пользователь: Сообщение об оплате 
+
+Платежная_система --> Сервер: Уведомление об оплате
+Deactivate Платежная_система
+
+Сервер --> Пользователь: Сообщение о брони мест
+Сервер --> Пользователь: Отправка эл билета
+
+Deactivate Сервер
+Deactivate Пользователь
+Deactivate Приложение
+@enduml
+
+http://www.plantuml.com/plantuml/png/hLPBRjH04DttAMe9Yxb05b6Gk0SQXLcC124AXhK7mW85XCG6LaGH5_2CPi2on_OLgcx4Up8ebSWj3-vit2xNg_VgzQVbazVP_29xy_95U7AQlReGlTPMQ_kalp5kjB1tkcCSpW5RdYxFvsSPG9PhgJKWlv1kyBwx2xZH7I0RFkzLQjsJehB1svTdjjBILloaUoq2-rY-dMUBGHMNzH8XnFgMsV4WaHo9VWMmrQsm4TIXIlkSNM90CHkIC5WEMjy1wRvhOvUYhUZ6hdHjkUVP1G-VpOwZ3H-HkEES8569Lbf2isMUACk9dsYOVO4g7s8j4emEq4qsZ04Ssc1CD-hOaWmwcid6a2-edMwgPqenv2Wcci6MvgbDjlAN9ysC8pdS3kGGREy98bZpqVsxgFoDD7fxZSp6I3cx-gQ5TZpajXA2N2_sNdJD6O8vUXtdmmn4R_I8rXfnmSK1hgBY5c6ZZLtP1-H5Ar3a94dt-WC1zGjKrxSh45TCTdnDj_tk8AreXv1ReAGYJ9Efb4S2shsjC52Ua5RtZn_MCVLxyeTOonjyuUfzZEza2OVAk4C4wfzywwS0rV63ydGn_v-JuaIcc1F4M4p6jxVHmQG3Qs6VjRvxmBmZp-o_nmGSPlXFvcHnzXp_NNy0
