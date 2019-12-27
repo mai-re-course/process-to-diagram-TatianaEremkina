@@ -1,0 +1,50 @@
+@startuml
+Actor Пользователь
+participant Браузер
+participant Сервер_DNS
+participant Сервер
+
+Пользователь -> Браузер : Ввод maps.google.com 
+Activate Браузер
+
+Браузер -> Браузер : Проверка IP в списке HSTS
+
+Alt Сайт  в списке HSTS
+
+Браузер -> Браузер : Проверка в кеше браузера
+
+Alt Домен  в кеше
+
+Браузер -> Браузер : Отображение страницы из кеша
+
+Else Вызов gethostbyname
+Браузер -> Браузер : Поиск в host файле
+Activate Сервер_DNS
+Браузер --> Сервер_DNS : Запрос на DNS сервис
+Браузер --> Сервер_DNS : Запрос ARP
+Браузер <-- Сервер_DNS : ОТвет ARP
+Deactivate Сервер_DNS
+Браузер -> Браузер : Запрос сокета TCP
+Браузер -> Браузер : Ответ сокета TCP
+Activate Сервер
+Браузер -> Сервер : Запрос на TLS рукопожатие
+Сервер --> Браузер : Ответ на TLS рукопожатие
+Deactivate Сервер
+Браузер --> Сервер : Отправление HTTP-запроса
+Браузер <-- Сервер : Ответ HTTP-запроса
+end
+
+Браузер -> Браузер : Разбор HTML
+Браузер -> Браузер : Интерпретация CSS
+Браузер --> Пользователь : Отображение страницы
+
+else Использование протокола HTTP
+
+Браузер --> Пользователь: Ответ об использовании протокола HTTPS
+
+end
+
+Deactivate Браузер
+@enduml
+
+http://www.plantuml.com/plantuml/png/dLNHQXD157sVhxW_iFq04MbeXGfLWhlliiOb1f9iQ5R1joHA4Ig88kXJgtx1jfXstTZDBvpv8yzbGqY6NRBjGxVCdNlEkVVScSd-E0bFaZU3lcbralX4S8422_i9D_n_XTJECDUr6J6jr-cDmc4Y-68dt7hFfBcTR6_zqX2H_BuuVERNRXfJ9oNU8qT17WY-CgN07nc4e_5UDuwx_MYl4mz4w-wz3PF8hSeu79Mi5mnGN9V8aSgJjk1Ax1HBPFpccCkH7_Z6jFfQFbByjJEfphcN89cKmNua2outiv6kLByHy8_MtCfcTZEvSvfQbBouLWva5B9JEzEGBksfFHD6RrRCAlkuFuxek3qhHoFTA7aTZvENxuRX86hM9ehI72rPiM8_g7bOOBunCVUmkDJaTdEK_JkfbcgadGfxI4NZL2iJgNiVejRpjWjxw7cLi7FyXWPceg33A6pSaEkLMmIRA90hDL893jgDXroMuyAhhNP97NCg7GwEwV24a9mAI_vTwuNLqsIsiDwE2dUHrPYvOw1haQLcCRHOd_MZ86XxHAtxGRfZp4x5LGJHy5Mp-_SJAHUNX4r8zFIu4UW7RgdEXIgMmxIdoEndEV2hxqZTIzhu1J0cufsdj3vhssGhnAfx9Sir0QceC-OkzMpvgbK9iXh1h4xGDwNxF2Wr3_y-z_c3zXy0
