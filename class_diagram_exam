@@ -1,0 +1,97 @@
+@startuml
+class  Пользователь {
+  -Serial ID
+  -Text Имя пользователя
+  -Text Пароль
+  -Text Пол
+  -INT  Возраст
+}
+
+class  Хранилище {
+-get()
+-set()
+-delete()
+}
+
+class  Платежная_система {
+-Отправка оплаты()
+-Прием оплаты()
+}
+
+class  Фильмы {
+  -Serial ID
+  -Text Название
+  #Text Рейтинг
+  -Text Жанр
+}
+
+class  Кинотеатр {
+  -Serial ID
+  -Text Название
+  #JSON Сеансы
+}
+
+class  Сеанс {
+  -Serial ID
+  -Text Название
+  #Text Время нач
+  #Text Цена
+  #INT  Длительность
+}
+
+class  Зал {
+  -Serial ID
+  -Text Название зала
+  #INT  кол - во мест
+}
+
+class  Место {
+  -Serial ID
+  -Text Статус места
+  #INT  Номер
+  #INT  Ряд
+}
+
+class  Билет {
+  -Serial ID
+  -DATA Дата покупки
+  -FLOAT  Стоимость
+  -INT  кол - во билетов
+  -INT Ряд
+  -INT Место
+}
+
+class  Бонусы {
+  -INT  кол - во бонусов
+  -Добавит бонусы()
+  -Хранить бонусы()
+}
+
+class  Формирование_стоимости {
+  -INT  кол - во бонусов
+  -Оплатить бонусами()
+  -Оплатить безнал()
+  -Оплатить часть бонусами()
+  -Формирование суммы билета()
+}
+
+Пользователь <-- Хранилище
+Фильмы <-- Хранилище
+Фильмы --{ Сеанс
+Сеанс -- Кинотеатр
+Кинотеатр *-- Зал
+Зал *-- Место
+Билет --> Сеанс
+Билет -- Место
+Хранилище --{ Платежная_система
+Пользователь --{ Бонусы
+Хранилище --{ Бонусы
+Пользователь -- Платежная_система
+Пользователь --{ Билет
+Билет -- Формирование_стоимости
+Бонусы -- Формирование_стоимости
+Платежная_система -- Формирование_стоимости
+Пользователь -- Формирование_стоимости
+@enduml
+
+http://www.plantuml.com/plantuml/png/fLPTQnD157tVNp7WYmhp3qHQA495seVcNO9TH8W-D1648kJZeKWAmI8gOfiMrEVrOysQR3T_uSu_yfmCsvarExIBJvkvzznxphrpxv2DRgzzq7lvl1CzwRIxNQLaAeKipB7CyFqXYHbAohCwZ9JIU_71itP7RM_nq8fVzPHybDnCb2nhmoOEDuMnRq6-4GOUjtTQu3x1SGPKOWPc6BsEhaHzfL4k9PE5PEQDf92ZdyQzstSYtRMV_RWJzsByyiAcW5ifln6ScCbZCq3yO6NA9M4MESDfoVpGFOSD6fOspeoPMAPmPWoekYfCNu1W-RaP1pjr2eePI6mXAHothECSoVz0HGR7JuT_JwJf-pIVLfY2-bSg-at87kxjxYYva9H6D67iCdlcvl9Fq9_KJW6RVEGyts27YGPxmUzuV-L8iHBUXJdsXNm0mUAc8XGEWFiKSuwKqWgWGaakwR-pzDcQf0YINC3BxexCu2g3Jt4A2fhxpdHk9lBBPtdBWG1cMCEojTdQP2yIfhMhCpSZVEUIqV_WqUucar97WJnvsISwwwhyNf9n-KgGrLIUNDbLbOLSiawERJ1x2IgpGte1AnQ6b-a1k1K4k7sbQW-mlZO5a3bmVIdSjM9DgwLBraJUMRcbQ_oIa0mQ0h1KPXnOMGGWviY-JS6aeOeKeaOmuttmhoknxGW-klUqhddy8l-vkH56wqDlnIFt4vwQLoLQDwcxGDhbZEo75d-il97N-hv7L_Nu8UkogVJwTplSC8RxKnsag632sVvNYokzseKcen_vOfl6Ngk_SS9mkOtoRCGlzl6_uoy0
